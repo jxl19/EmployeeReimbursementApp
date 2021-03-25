@@ -16,7 +16,7 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
       <input id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </form>
     <div>
-  <a class="" href="">Logout</a>
+  <a href="logout">Logout</a>
   </div>
 </div>`;
 document.getElementById("nav").innerHTML = x;
