@@ -4,34 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
-  />
-    <link rel="stylesheet" href="login.css">
-    <title>Login</title>
+    />
+    <link rel="stylesheet" href="reimburse.css"/>
 </head>
 <body>
-    <div class="top"></div>
-    <div class="container">
-        <div class="card border-0 text-center">
-            <div class="card-body">
-              <h5 class="card-title">Welcome!</h5>
-              <p class="card-text">Login in to check your pending reimbursements or submit a new reimbursement form</p>
-              <form action="home" method="post">
-                <div class="form-group">
-                  <input type="username" class="form-control user-login" id="username" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control pw-login" id="password" name="password" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-primary signin-button">Sign in</button>
-              </form>
-            </div>
-          </div>
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+    <!-- we can do a similar style left side will be the request and right side can be most recent requests? --> 
+    
+    <form class="add-form">
+        <input type="text" class="add-form-input" id="amount" placeholder="Enter amount to start new expense" autocomplete="off">
+        <div id="new-req-form" class="hide-add">
+            <textarea placeholder="Reason for expense" id="reason"></textarea>
+            <button class="submit add-submit" type="submit">Submit</button>
         </div>
+    </form>
+    <div id="x"></div>
 </body>
 <script
 src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -48,4 +41,5 @@ src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 crossorigin="anonymous"
 ></script>
+<script src="navbar.js"></script>
 </html>

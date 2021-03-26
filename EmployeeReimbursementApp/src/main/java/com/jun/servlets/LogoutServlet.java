@@ -23,8 +23,9 @@ public class LogoutServlet extends HttpServlet {
 		 System.out.println("logging out");
 		 HttpSession session=request.getSession();  
          session.invalidate();  
-         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.html");
-         dispatcher.forward(request, response);
+//         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+//         dispatcher.forward(request, response);
+         response.sendRedirect(request.getContextPath() + "/login.jsp");
 	}
 
 }

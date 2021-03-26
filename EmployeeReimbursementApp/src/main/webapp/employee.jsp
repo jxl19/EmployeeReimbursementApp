@@ -10,7 +10,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="employee.css" />
     <title>Employee Reimbursement</title>
   </head>
   <body>
@@ -21,8 +21,8 @@
                     <div class="col-sm-6">
                       <div class="card border-0">
                         <div class="card-body">
-                          <h5 class="card-title text-center"><%=request.getParameter("username") %></h5>
-                          <p class="card-text text-center">Id: 5</p>
+                            <h5 class="card-title text-center"><%=session.getAttribute("firstName")%> <%=session.getAttribute("lastName")%></h5>
+                          <p class="card-text text-center">Id: <%=session.getAttribute("id")%></p>
                           <p class="card-text text-center">Total Reimbursed: $320</p>
                         </div>
                       </div>

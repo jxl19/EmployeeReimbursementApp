@@ -9,27 +9,65 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">Settings</a>
+        <a class="nav-link" href="">Expense Request</a>
       </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">Settings</a>
+    </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    </form>
     <div>
   <a href="logout">Logout</a>
   </div>
 </div>`;
+
 document.getElementById("nav").innerHTML = x;
 
-function search() {
-  let q = document.getElementById("query").value;
-  alert(q);
+let formOpened = false;
+$('.add-form-input').on('click', function () {
+    $('#new-req-form').removeClass('hide-add');
+    formOpened = true;
+})
+
+$(window).on('click', function () {
+    console.log('asd')
+    let focused = $('#new-req-form').children().is(':focus') || $('#new-req-form').children().children().is(':focus');
+    let openForm = $('.add-form-input').is(':focus');
+    if(formOpened){
+        if(focused || openForm) {
+            return;
+        }
+        else{
+            $('#new-req-form').addClass('hide-add');
+            formOpened = false;
+        }
+    }
+})
+function postNewRequest() {
+  console.log('starting post')
+  let amount = $('#amount').val(),
+      reason = $('#reason').val();
+  
+  const newPost = {
+    amount: amount,
+    reason: reason
+  }
+
+  fetch('http://localhost:8080/EmployeeReimbursementApp/api/post/createrequest', {
+    method:'post',
+    body: JSON.stringify(newPost),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept' : 'application/json'
+    }
+  }).then(function(res) {
+    return res.json();
+  }).then(function(data) {
+    console.log(data);
+    $('#x').append(`<p>${data.amount}</p><p>${data.reason}</p>`)
+  })
 }
 
-let query = document.getElementById("query");
-query.addEventListener("keydown", (e) => { 
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    search();
-  }
+$('.add-form').submit(function (e) {
+  e.preventDefault();
+  postNewRequest();
 })
