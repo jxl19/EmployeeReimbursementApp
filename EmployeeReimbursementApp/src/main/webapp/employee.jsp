@@ -11,10 +11,19 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="employee.css" />
+    <link rel="stylesheet" href="reimburse.css"/>
     <title>Employee Reimbursement</title>
   </head>
   <body>
     <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+    <form class="add-form">
+      <input type="text" class="add-form-input" id="amount" placeholder="Enter amount to start new expense" autocomplete="off">
+      <div id="new-req-form" class="hide-add">
+          <textarea placeholder="Reason for expense" id="reason"></textarea>
+          <button class="submit add-submit" type="submit">Submit</button>
+      </div>
+  </form>
+  <div id="x"></div>
     <div class="container-fluid vh-100">
         <!-- we want to show only first 10? -->
             <div class="row h-100 justify-content-center align-items-center">

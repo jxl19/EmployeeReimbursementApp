@@ -1,16 +1,16 @@
 package com.jun.model;
 
-public class Login {
+public class Employee {
 	private boolean isManager;
 	private int loginId;
 	private String firstName;
 	private String lastName;
 	
-	public Login() {
+	public Employee() {
 		super();
 	}
 
-	public Login(boolean isManager, int loginId, String firstName, String lastName) {
+	public Employee(boolean isManager, int loginId, String firstName, String lastName) {
 		super();
 		this.isManager = isManager;
 		this.loginId = loginId;
@@ -69,7 +69,7 @@ public class Login {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Login other = (Login) obj;
+		Employee other = (Employee) obj;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;

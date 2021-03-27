@@ -15,6 +15,9 @@ public class PostController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createRequest(String body) {
 		System.out.println("body: " + body);
+		//we need to return the newly created data and add to our table
+		//lazy way... just calling the function that already crates the table
+		//better way. add newly created to current table
 		return Response.status(200).entity(body).build();
 	}
 }
