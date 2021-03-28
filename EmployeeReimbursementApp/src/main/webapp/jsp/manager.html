@@ -11,7 +11,10 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="../css/employee.css"/>
+    <link rel="stylesheet" href="../css/manager.css"/>
 </head>
 <body>
     <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,13 +42,17 @@
     <div class="container">
         <div>
             <form>
-                <h6>Search for an employee using  id</h6>
-                <input type="username" class="form-control user-login" id="username" placeholder="Username or Id">
+                <input type="username" class="form-control user-login" id="username" placeholder="Search with employee id">
             </form>
             <table id="requests" class="table borderless loading">
-
+              
             </table>
     </div>
+
+    <div id="confirmation-modal" class="modal">
+      <div class="container modal-content">
+      </div>
+  </div>
 </body>
 <script
 src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -65,15 +72,16 @@ crossorigin="anonymous"
 <script src="../js/table-loading.js"></script>
 <script src="../js/manager.js"></script>
 </html>
-
-
-<!-- <thead>
+<!-- 
+<thead>
   <tr>
     <th scope="col">Reimbusement Id</th>
     <th scope="col">User</th>
     <th scope="col">User Id</th>
     <th scope="col">Expense</th>
     <th scope="col">Reason</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
   </tr>
 </thead>
 <tbody>
@@ -83,68 +91,9 @@ crossorigin="anonymous"
     <td>1</td>
     <td>$100</td>
     <td>Business Trip</td>
-  </tr>
-  <tr>
-      <td>2</td>
-      <td>Joey</td>
-    <th scope="row">2</th>
-    <td>$200</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>3</td>
-    <td>Heather</td>
-    <th scope="row">3</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>4</td>
-    <td>Sophia</td>
-    <th scope="row">4</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>5</td>
-    <td>Danny</td>
-    <th scope="row">5</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>6</td>
-    <td>King</td>
-    <th scope="row">6</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>7</td>
-    <td>King</td>
-    <th scope="row">6</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>8</td>
-      <td>King</td>
-    <th scope="row">6</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>9</td>
-    <td>King</td>
-    <th scope="row">6</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
-  </tr>
-  <tr>
-      <td>10</td>
-    <td>King</td>
-    <th scope="row">6</th>
-    <td>$150</td>
-    <td>Business Trip a</td>
+    <td class="material-icons">
+      <span id="approve">check_circle_outline</span> 
+      <span id="decline">highlight_off</span>
+    </td>
   </tr>
 </tbody> -->
