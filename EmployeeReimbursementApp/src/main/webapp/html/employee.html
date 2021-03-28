@@ -10,8 +10,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="employee.css" />
-    <link rel="stylesheet" href="reimburse.css"/>
+    <link rel="stylesheet" href="../css/employee.css"/>
+    <link rel="stylesheet" href="../css/reimburse.css"/>
     <title>Employee Reimbursement</title>
   </head>
   <body>
@@ -24,7 +24,6 @@
       </div>
   </form>
     <div class="container-fluid vh-100">
-        <!-- we want to show only first 10? -->
             <div class="row h-100 justify-content-center">
                     <div class="col-sm-6">
                       <div class="card border-0">
@@ -37,18 +36,45 @@
                     </div>
                     <!-- add ability to filter thru all/pending/done -->
                     <div class="col-sm-6">
-                        <table id="requests" value="${id}" class="table borderless">
-                          <thead id="table-head">
+                        <table id="requests" value="${id}" class="table borderless loading">
+                            <thead id="table-head">
+                                <tr>
+                                  <th scope="col">Request Id</th>
+                                  <th scope="col">Expense</th>
+                                  <th scope="col">Reason</th>
+                                  <th scope="col">Pending</th>
+                                  <th scope="col">Approved</th>
+                                </tr>
+                              </thead>
                             <tr>
-                              <th scope="col">Request Id</th>
-                              <th scope="col">Expense</th>
-                              <th scope="col">Reason</th>
-                              <th scope="col">Pending</th>
-                              <th scope="col">Approved</th>
+                                <th class="skel-th"><span></span></th>
+                                <th class="skel-th"><span></span></th>
+                                <th class="skel-th"><span></span></th>
+                                <th class="skel-th"><span></span></th>
+                                <th class="skel-th"><span></span></th>
                             </tr>
-                          </thead>
-                            </tbody>
-                          </table>
+                            <tr>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                            </tr>
+                            <tr>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                            </tr>
+                            <tr>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                                <td class="skel-th"><span></span></td>
+                            </tr>
+                        </table>
                     </div>
                   </div>
           </div>
@@ -68,5 +94,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"
   ></script>
-  <script src="navbar.js"></script>
+  <script src="../js/navbar.js"></script>
 </html>

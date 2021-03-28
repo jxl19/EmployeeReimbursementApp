@@ -9,14 +9,11 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">Expense Request</a>
-      </li>
-    <li class="nav-item">
         <a class="nav-link" href="">Settings</a>
     </li>
     </ul>
     <div>
-  <a href="logout">Logout</a>
+  <a href="/EmployeeReimbursementApp/logout">Logout</a>
   </div>
 </div>`;
 
@@ -29,17 +26,17 @@ $('.add-form-input').on('click', function () {
 })
 
 $(window).on('click', function () {
-    let focused = $('#new-req-form').children().is(':focus') || $('#new-req-form').children().children().is(':focus');
-    let openForm = $('.add-form-input').is(':focus');
-    if(formOpened){
-        if(focused || openForm) {
-            return;
-        }
-        else{
-            $('#new-req-form').addClass('hide-add');
-            formOpened = false;
-        }
-    }
+  let focused = $('#new-req-form').children().is(':focus') || $('#new-req-form').children().children().is(':focus');
+  let openForm = $('.add-form-input').is(':focus');
+  if(formOpened){
+      if(focused || openForm) {
+          return;
+      }
+      else{
+          $('#new-req-form').addClass('hide-add');
+          formOpened = false;
+      }
+  }
 })
 
 function loadRequestData(employeeId) {
@@ -48,17 +45,6 @@ function loadRequestData(employeeId) {
     .then(res => res.json())
     .then(data => {
       if(data.length) {
-        $("#requests").append(
-        `<thead id="table-head">
-          <tr>
-            <th scope="col">Request Id</th>
-            <th scope="col">Expense</th>
-            <th scope="col">Reason</th>
-            <th scope="col">Pending</th>
-            <th scope="col">Approved</th>
-          </tr>
-        </thead>`
-        )
         data.forEach(r => {
           requestData += `
           <tbody>
@@ -72,8 +58,21 @@ function loadRequestData(employeeId) {
           `
         })
         requestData+= `</tbody></table>`;
+        $("#requests").empty();
+        $("#requests").append(
+          `<thead id="table-head">
+            <tr>
+              <th scope="col">Request Id</th>
+              <th scope="col">Expense</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Pending</th>
+              <th scope="col">Approved</th>
+            </tr>
+          </thead>`
+          )
         $("#requests").append(requestData);
       } else {
+        $("#requests").empty();
         $("#requests").append(`<p id="zeroreqs" style="text-align: center">You have no expense requests`)
       }
     })
@@ -88,7 +87,14 @@ function postNewRequest() {
     amount: amount,
     reason: reason
   }
-
+  $('#requests').append(`<tr id="new-post-load">
+  <td class="skel-th"><span></span></td>
+  <td class="skel-th"><span></span></td>
+  <td class="skel-th"><span></span></td>
+  <td class="skel-th"><span></span></td>
+  <td class="skel-th"><span></span></td>
+  </tr>`);  
+  $('#new-req-form').addClass('hide-add');
   fetch('http://localhost:8080/EmployeeReimbursementApp/api/post/createrequest', {
     method:'post',
     body: JSON.stringify(newPost),
@@ -98,8 +104,8 @@ function postNewRequest() {
     }
   }).then(res => res.json())
   .then(data => {
-    if($("#table-head").is(":hidden")) $("#table-head").show();
-    ($("#zeroreqs").remove());
+    $('#zeroreqs').remove();
+    $('#new-post-load').remove();
     $('#requests').append(`          
     <tbody>
     <tr>
@@ -117,7 +123,6 @@ $('.add-form').submit(function (e) {
   postNewRequest();
 })
 
-$(document).ready(function () { 
-  $("#table-head").hide();
+$(document).ready(function () {
   loadRequestData(employeeId);
 })

@@ -50,13 +50,13 @@ public class LoginServlet extends HttpServlet {
     		boolean isManager = user.isManager();
     		
     		if (!isManager) {
-    			dispatcher = getServletContext().getRequestDispatcher("/employee.jsp");
+    			dispatcher = getServletContext().getRequestDispatcher("/jsp/employee.jsp");
     			dispatcher.forward(request, response);
     		} else if (isManager){
-    			dispatcher = getServletContext().getRequestDispatcher("/manager.html");
+    			dispatcher = getServletContext().getRequestDispatcher("/jsp/manager.html");
     			dispatcher.forward(request, response);
     		} else {
-    			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+    			dispatcher = getServletContext().getRequestDispatcher("/jsp/login.jsp");
     			dispatcher.forward(request,response);
     		}
     	}

@@ -10,7 +10,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
   	/>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/EmployeeReimbursementApp/css/login.css">
     <title>Login</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
             <div class="card-body">
               <h5 class="card-title">Welcome!</h5>
               <p class="card-text">Login in to check your pending reimbursements or submit a new reimbursement form</p>
-              <form action="home" method="post">
+              <form action="/EmployeeReimbursementApp/home" method="post">
                 <div class="form-group">
                   <input type="username" class="form-control user-login" id="username" name="username" placeholder="Username">
                 </div>
