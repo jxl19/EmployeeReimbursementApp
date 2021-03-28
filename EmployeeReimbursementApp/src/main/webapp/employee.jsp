@@ -25,7 +25,7 @@
   </form>
     <div class="container-fluid vh-100">
         <!-- we want to show only first 10? -->
-            <div class="row h-100 justify-content-center align-items-center">
+            <div class="row h-100 justify-content-center">
                     <div class="col-sm-6">
                       <div class="card border-0">
                         <div class="card-body">
@@ -38,15 +38,15 @@
                     <!-- add ability to filter thru all/pending/done -->
                     <div class="col-sm-6">
                         <table id="requests" value="${id}" class="table borderless">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Expense</th>
-                                <th scope="col">Pending</th>
-                                <th scope="col">Approved</th>
-                              </tr>
-                            </thead>
-                           
+                          <thead id="table-head">
+                            <tr>
+                              <th scope="col">Request Id</th>
+                              <th scope="col">Expense</th>
+                              <th scope="col">Reason</th>
+                              <th scope="col">Pending</th>
+                              <th scope="col">Approved</th>
+                            </tr>
+                          </thead>
                             </tbody>
                           </table>
                     </div>

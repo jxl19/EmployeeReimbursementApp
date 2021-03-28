@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.jun.model.Reimbursement;
@@ -16,8 +17,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		String sql = "SELECT * FROM reimbursement.reimbursement_requests WHERE login_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, loginId);
-		
-
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {
@@ -28,8 +27,30 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			String reason = rs.getString("reason");
 			rList.add(new Reimbursement(reqId, amount, pending, approved, reason));
 		}
-		System.out.println("inside dao: " + rList);
 		return rList;
+	}
+
+	@Override
+	public Reimbursement createNewReimbursement(int loginId, double amount, String reason, Connection con)
+			throws SQLException {
+		Reimbursement reimbursement = null;
+		String sql = "INSERT INTO reimbursement.reimbursement_requests (login_id, amount, reason) VALUES (?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setInt(1, loginId);
+		ps.setDouble(2, amount);
+		ps.setString(3, reason);
+		ps.executeUpdate();
+		
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			int reqId = rs.getInt("request_id");
+			double amounts = rs.getDouble("amount");
+			boolean pending = rs.getBoolean("pending");
+			boolean approved = rs.getBoolean("approved");
+			String reasons = rs.getString("reason");
+			reimbursement = new Reimbursement(reqId, amounts, pending, approved, reasons);
+		}
+		return reimbursement;
 	}
 
 }

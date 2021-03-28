@@ -68,7 +68,6 @@ public class LoginServlet extends HttpServlet {
 		try {
 			processRequest(request, response);
 		} catch (SQLException | NullPointerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -21,7 +21,7 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
 </div>`;
 
 document.getElementById("nav").innerHTML = x;
-
+let employeeId = $('#requests').attr('value');
 let formOpened = false;
 $('.add-form-input').on('click', function () {
     $('#new-req-form').removeClass('hide-add');
@@ -43,17 +43,13 @@ $(window).on('click', function () {
 })
 
 function loadRequestData(employeeId) {
-  console.log("fetching table data");
-  $("#requests").empty();
   let requestData = "";
   fetch('http://localhost:8080/EmployeeReimbursementApp/api/get/employee/' + employeeId)
     .then(res => res.json())
     .then(data => {
-      console.log("data", data);
       if(data.length) {
-        console.log("here ", data.length)
         $("#requests").append(
-        `<thead>
+        `<thead id="table-head">
           <tr>
             <th scope="col">Request Id</th>
             <th scope="col">Expense</th>
@@ -77,19 +73,18 @@ function loadRequestData(employeeId) {
         })
         requestData+= `</tbody></table>`;
         $("#requests").append(requestData);
-        console.log("rd", requestData)
       } else {
-        $("#requests").append(`<h1>You have not made a request</h1>`)
+        $("#requests").append(`<p id="zeroreqs" style="text-align: center">You have no expense requests`)
       }
     })
 }
 
 function postNewRequest() {
-  console.log('starting post')
   let amount = $('#amount').val(),
       reason = $('#reason').val();
-  
+
   const newPost = {
+    rId: employeeId,
     amount: amount,
     reason: reason
   }
@@ -101,10 +96,19 @@ function postNewRequest() {
       'Content-Type': 'application/json',
       'Accept' : 'application/json'
     }
-  }).then(function(res) {
-    return res.json();
-  }).then(function(data) {
-    $('#requests').append(`<p>${data.amount}</p><p>${data.reason}</p>`)
+  }).then(res => res.json())
+  .then(data => {
+    if($("#table-head").is(":hidden")) $("#table-head").show();
+    ($("#zeroreqs").remove());
+    $('#requests').append(`          
+    <tbody>
+    <tr>
+      <th scope="row">${data.rId}</th>
+      <td>${data.amount}</td>
+      <td>${data.reason}</td>
+      <td>${data.pending}</td>
+      <td>${data.approved}</td>
+    </tr>`)
   })
 }
 
@@ -113,9 +117,7 @@ $('.add-form').submit(function (e) {
   postNewRequest();
 })
 
-
 $(document).ready(function () { 
-  let employeeId = $('#requests').attr('value');
-  console.log('employeeId: ', employeeId);
+  $("#table-head").hide();
   loadRequestData(employeeId);
 })

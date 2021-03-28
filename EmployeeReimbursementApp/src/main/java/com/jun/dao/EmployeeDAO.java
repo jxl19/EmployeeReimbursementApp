@@ -8,4 +8,5 @@ import com.jun.model.Reimbursement;
 
 public interface EmployeeDAO {
 	public ArrayList<Reimbursement> getAllReimbursementRequests(int loginId, Connection con) throws SQLException;
+	public Reimbursement createNewReimbursement(int loginId, double amount, String reason, Connection con) throws SQLException;
 }

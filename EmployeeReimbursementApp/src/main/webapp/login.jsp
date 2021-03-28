@@ -9,7 +9,7 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
-  />
+  	/>
     <link rel="stylesheet" href="login.css">
     <title>Login</title>
 </head>
@@ -22,7 +22,7 @@
               <p class="card-text">Login in to check your pending reimbursements or submit a new reimbursement form</p>
               <form action="home" method="post">
                 <div class="form-group">
-                  <input type="username" class="form-control user-login" id="username" name="username" placeholder="Username1">
+                  <input type="username" class="form-control user-login" id="username" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control pw-login" id="password" name="password" placeholder="Password">

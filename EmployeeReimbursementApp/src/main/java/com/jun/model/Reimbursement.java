@@ -7,6 +7,17 @@ public class Reimbursement {
 	private boolean approved;
 	private String reason;
 	
+	public Reimbursement() {
+		super();
+	}
+	
+	public Reimbursement(int rId, double amount, String reason) {
+		super();
+		this.rId = rId;
+		this.amount = amount;
+		this.reason = reason;
+	}
+	
 	public Reimbursement(int rId, double amount, boolean pending, boolean approved, String reason) {
 		super();
 		this.rId = rId;

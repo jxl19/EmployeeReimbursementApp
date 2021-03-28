@@ -41,7 +41,6 @@ public class GetController {
 			ObjectMapper map = new ObjectMapper();
 			ArrayList<Reimbursement> rList = new ArrayList<>();
 			rList = employeeDAO.getAllReimbursementRequests(id, con);
-			System.out.println(rList);
 			try {
 				return map.writeValueAsString(rList);
 			} catch (JsonProcessingException e) {
