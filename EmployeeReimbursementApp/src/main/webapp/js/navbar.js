@@ -83,7 +83,7 @@ function postNewRequest() {
       reason = $('#reason').val();
 
   const newPost = {
-    rId: employeeId,
+    userId: employeeId,
     amount: amount,
     reason: reason
   }

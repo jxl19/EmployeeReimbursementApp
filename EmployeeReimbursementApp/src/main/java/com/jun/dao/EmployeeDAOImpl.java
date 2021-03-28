@@ -25,7 +25,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			boolean pending = rs.getBoolean("pending");
 			boolean approved = rs.getBoolean("approved");
 			String reason = rs.getString("reason");
-			rList.add(new Reimbursement(reqId, amount, pending, approved, reason));
+			rList.add(new Reimbursement(reqId, loginId, amount, pending, approved, reason));
 		}
 		return rList;
 	}
@@ -35,6 +35,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			throws SQLException {
 		Reimbursement reimbursement = null;
 		String sql = "INSERT INTO reimbursement.reimbursement_requests (login_id, amount, reason) VALUES (?,?,?)";
+		System.out.println("login: " + loginId);
+		System.out.println(amount);
+		System.out.println(reason);
 		PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		ps.setInt(1, loginId);
 		ps.setDouble(2, amount);
@@ -48,7 +51,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			boolean pending = rs.getBoolean("pending");
 			boolean approved = rs.getBoolean("approved");
 			String reasons = rs.getString("reason");
-			reimbursement = new Reimbursement(reqId, amounts, pending, approved, reasons);
+			reimbursement = new Reimbursement(reqId, loginId, amounts, pending, approved, reasons);
 		}
 		return reimbursement;
 	}
