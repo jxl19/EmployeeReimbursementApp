@@ -23,22 +23,22 @@
           <button class="submit add-submit" type="submit">Submit</button>
       </div>
   </form>
-  <div id="x"></div>
     <div class="container-fluid vh-100">
         <!-- we want to show only first 10? -->
             <div class="row h-100 justify-content-center align-items-center">
                     <div class="col-sm-6">
                       <div class="card border-0">
                         <div class="card-body">
-                            <h5 class="card-title text-center"><%=session.getAttribute("firstName")%> <%=session.getAttribute("lastName")%></h5>
-                          <p class="card-text text-center">Id: <%=session.getAttribute("id")%></p>
+                            <h5 class="card-title text-center">${firstName} ${lastName}</h5>
+                          <p class="card-text text-center">Id: ${id}</p>
                           <p class="card-text text-center">Total Reimbursed: $320</p>
                         </div>
                       </div>
                     </div>
+                    <!-- add ability to filter thru all/pending/done -->
                     <div class="col-sm-6">
-                        <table class="table borderless">
-                            <thead">
+                        <table id="requests" value="${id}" class="table borderless">
+                            <thead>
                               <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Expense</th>
@@ -46,62 +46,9 @@
                                 <th scope="col">Approved</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>$100</td>
-                                <td>Done</td>
-                                <td>Approved</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>$200</td>
-                                <td>Pending</td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">6</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">7</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">8</th>
-                                <td>$150</td>
-                                <td>Done</td>
-                                <td>Denied</td>
-                              </tr>
+                           
                             </tbody>
                           </table>
-                      <!-- <div class="card border-0">
-                        <div class="card-body">
-                          <h5 class="card-title text-center">Table of Pending Applications</h5>
-                          <p class="card-text"></p>
-                      </div> -->
                     </div>
                   </div>
           </div>
