@@ -6,7 +6,7 @@ function getAllPendingRequests() {
         if(data.length) {
           data.forEach(r => {
             requestData += `
-            <tbody>
+            <tbody name=${r.rId}>
               <tr>
                 <td>${r.rId}</td>
                 <td>${r.userId}</td
@@ -15,8 +15,8 @@ function getAllPendingRequests() {
                 <td>${r.pending}</td>
                 <td>${r.approved}</td>
                 <td class="material-icons">
-                    <span id="approve">check_circle_outline</span> 
-                    <span id="decline">highlight_off</span>
+                    <span id="approve" data-id=${r.rId}>check_circle_outline</span> 
+                    <span id="decline" data-id=${r.rId}>highlight_off</span>
                 </td>
               </tr>
             `
@@ -28,7 +28,7 @@ function getAllPendingRequests() {
             `<thead id="table-head">
               <tr>
                 <th scope="col">Request Id</th>
-                <th scope="col">User Id</th
+                <th scope="col">Employee Id</th
                 <th scope="col">Expense</th>
                 <th scope="col">Reason</th>
                 <th scope="col">Pending</th>
@@ -45,9 +45,9 @@ function getAllPendingRequests() {
         }
       })
 }
-
+// modal to check if approve
 $('#requests').on('click','#approve',function() {
-    
+    const id = $(this).attr('data-id');
     $('.modal-content').empty();
     console.log('clicked')
     $('.modal-content').append(`
@@ -55,13 +55,14 @@ $('#requests').on('click','#approve',function() {
     <p>Are you sure you want to approve the reimbursement?</p>
 
     <div class="clearfix">
-    <button type="button" class="modal-approve">Yes</button>
-    <button type="button" class="modal-decline">No</button>
+        <button type="button" class="modal-approve approve-req" data-id=${id} data-bool="true">Yes</button>
+        <button type="button" class="modal-decline">No</button>
     </div>`)
     $('#confirmation-modal').css('display', 'block');
 })
-
+// modal to check if decline
 $('#requests').on('click','#decline',function() {
+    const id = $(this).attr('data-id');
     console.log('clicked2')
     $('.modal-content').empty();
     $('.modal-content').append(`
@@ -69,7 +70,7 @@ $('#requests').on('click','#decline',function() {
     <p>Are you sure you want to decline the reimbursement?</p>
 
     <div class="clearfix">
-      <button type="button" class="modal-approve">Yes</button>
+      <button type="button" class="modal-approve decline-req" data-id=${id} data-bool="false">Yes</button>
       <button type="button" id="testb" class="modal-decline">No</button>
     </div>`)
     $('#confirmation-modal').css('display', 'block');
@@ -78,11 +79,28 @@ $('#requests').on('click','#decline',function() {
 
 var modal = document.getElementById('confirmation-modal');
 
-$('.modal-content').on('click', '.modal-approve' ,function() {
-    console.log('approved');
+// approve/deny request
+$('.modal-content').on('click', '.modal-approve', function() {
+    const id = $(this).attr('data-id');
+    const approved = $(this).attr('data-bool');
+    console.log({id, approved})
+    const updateRequest = {
+        rId: id,
+        approved: approved
+    }
     modal.style.display = "none";
+    fetch('http://localhost:8080/EmployeeReimbursementApp/api/post/review-request', {
+    method:'post',
+    body: JSON.stringify(updateRequest),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept' : 'application/json'
+    }})
+    .then(res => res.json()) 
+    .then(data => data ? $(`tbody[name=${id}]`).remove() : console.log("data2" + data));
 })
 
+//close confirmation modal
 $('.modal-content').on('click', '.modal-decline' ,function() {
     console.log('declined');
     modal.style.display = "none";

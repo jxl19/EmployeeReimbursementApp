@@ -35,9 +35,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			throws SQLException {
 		Reimbursement reimbursement = null;
 		String sql = "INSERT INTO reimbursement.reimbursement_requests (login_id, amount, reason) VALUES (?,?,?)";
-		System.out.println("login: " + loginId);
-		System.out.println(amount);
-		System.out.println(reason);
 		PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		ps.setInt(1, loginId);
 		ps.setDouble(2, amount);

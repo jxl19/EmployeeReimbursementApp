@@ -13,16 +13,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jun.dao.EmployeeDAO;
 import com.jun.dao.EmployeeDAOImpl;
+import com.jun.dao.ManagerDAO;
+import com.jun.dao.ManagerDAOImpl;
 import com.jun.model.Reimbursement;
+import com.jun.model.UpdateRequests;
 import com.jun.util.ConnectionUtil;
 
 @Path("/post")
 public class PostController {
 	
 	public EmployeeDAO employeeDAO;
+	public ManagerDAO managerDAO;
 	public PostController() {
 		super();
 		this.employeeDAO = new EmployeeDAOImpl();
+		this.managerDAO = new ManagerDAOImpl();
 	}
 	
 	@POST
@@ -48,4 +53,26 @@ public class PostController {
 		return Response.status(200).entity(response).build();
 	}
 
+	@POST 
+	@Path("/review-request")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateRequest(String body) {
+		System.out.println("updatebody: " + body);
+		String response = null;
+		ObjectMapper map = new ObjectMapper();
+		try {
+			UpdateRequests ur = map.readValue(body, UpdateRequests.class);
+			try(Connection con = ConnectionUtil.getConnection()) {
+				System.out.println("ur: " + ur);
+				UpdateRequests approved = managerDAO.reviewReimbursement(ur.isApproved(), ur.getrId(), con);
+				response = map.writeValueAsString(approved);
+			} catch (SQLException e) {
+				e.getMessage();
+			}
+		} catch (JsonProcessingException e) {
+			e.getMessage();
+		}
+		System.out.println("approvedincont: " + response);
+		return Response.status(200).entity(response).build();
+	}
 }
