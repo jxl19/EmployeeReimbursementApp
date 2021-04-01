@@ -81,15 +81,11 @@ public class PostController {
 		System.out.println("approvedincont: " + response);
 		return Response.status(200).entity(response).build();
 	}
-	
-	//we can use jsonNode to grab the values? if its not undefined we will pass it in a update req
-	//only will be changing username/email/pw all strings
-	//we can also pass in undefined in a string value maybe? and if its undefined we dont update that in our sql req
+
 	@PUT 
 	@Path("/update-user/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateUser(String body, @PathParam("id") String id) {
-		System.out.println("updatedid: " + body);
 		String response = null;
 		ObjectMapper map = new ObjectMapper();
 		try(Connection con = ConnectionUtil.getConnection()) {
@@ -98,12 +94,8 @@ public class PostController {
 			String lastName = jsonNode.get("lastName").asText();
 			String email = jsonNode.get("email").asText();
 			String password = jsonNode.get("password").asText();
-			//create a dao to interact with updating
-			System.out.println("firstName : " + firstName +" lastName: " + lastName +" email: " + email + " password: " + password + " id: " + id);
 			Employee e = managerDAO.updateEmployee(id, firstName, lastName, email, password, con);
-			System.out.println("eeeee: " + e);
 			response = map.writeValueAsString(e);
-			System.out.println("responseString: " + response);
 		} catch (SQLException | JsonProcessingException e) {
 			e.getMessage();
 		} 

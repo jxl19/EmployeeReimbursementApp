@@ -1,6 +1,6 @@
-function getAllPendingRequests() {
+function getRequests(url) {
     let requestData = "";
-    fetch('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests')
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         if(data.length) {
@@ -45,6 +45,7 @@ function getAllPendingRequests() {
         }
       })
 }
+
 // modal to check if approve
 $('#requests').on('click','#approve',function() {
     const id = $(this).attr('data-id');
@@ -168,6 +169,15 @@ $('#search-button').on('click', function(e) {
   })
 })
 
+$('#pending-transactions').on('click', function() {
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
+})
+
+$('#resolved-transactions').on('click', function() {
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-completed-requests');
+})
+
 $(document).ready(function () {
-    getAllPendingRequests();
+  //pending reqs
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
 })

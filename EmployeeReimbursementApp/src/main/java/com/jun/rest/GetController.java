@@ -73,4 +73,22 @@ public class GetController {
 		}
 	}
 	
+	@GET
+	@Path("/all-completed-requests")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllCompletedEmployeeRequests() {
+		try(Connection con = ConnectionUtil.getConnection()) {
+			ObjectMapper map = new ObjectMapper();
+			ArrayList<Reimbursement> rList = new ArrayList<>();
+			rList = managerDAO.getAllCompletedReimbursements(con);
+			try {
+				return map.writeValueAsString(rList);
+			} catch (JsonProcessingException e) {
+				return e.getMessage();
+			}
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
 }
