@@ -49,11 +49,9 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("email", user.getEmail());
 			session.setAttribute("hireDate", user.getHireDate());
 			session.setAttribute("birthDate", user.getBirthDate());
-//			session.setAttribute("user", user);
     		boolean isManager = user.isManager();
     		
     		if (!isManager) {
-//    			dispatcher = getServletContext().getRequestDispatcher("/homepage");
     			response.sendRedirect("/EmployeeReimbursementApp/homepage");
     		} else if (isManager){
     			dispatcher = getServletContext().getRequestDispatcher("/jsp/manager.html");
