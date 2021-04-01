@@ -169,6 +169,44 @@ $('#search-button').on('click', function(e) {
   })
 })
 
+$('#all-employees').on('click', function() {
+  let requestData = "";
+  fetch('http://localhost:8080/EmployeeReimbursementApp/api/get/all-employees')
+  .then(res => res.json())
+  .then(data => {
+    if (data.length) {
+      data.forEach(emp => {
+        requestData += `
+        <tbody>
+          <tr>
+          <td>${emp.loginId}</td>
+          <td>${emp.firstName}</td>
+          <td>${emp.lastName}</td>
+          <td>${emp.hireDate}</td>
+          <td>${emp.birthDate}</td>
+          <td>${emp.email}</td>
+          </tr>
+        `
+      })
+      requestData+= `</tbody></table>`;
+      $("#requests").empty();
+      $("#requests").append(
+        `<thead id="table-head">
+          <tr>
+          <th scope="col">Login Id</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Hire Date</th>
+          <th scope="col">Birth Date</th>
+          <th scope="col">Email</th>
+          </tr>
+        </thead>`
+        )
+      $("#requests").append(requestData);
+    }
+  })
+})
+
 $('#pending-transactions').on('click', function() {
   getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
 })

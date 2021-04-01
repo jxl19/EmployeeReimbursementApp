@@ -16,6 +16,7 @@ import com.jun.dao.EmployeeDAO;
 import com.jun.dao.EmployeeDAOImpl;
 import com.jun.dao.ManagerDAO;
 import com.jun.dao.ManagerDAOImpl;
+import com.jun.model.Employee;
 import com.jun.model.Reimbursement;
 import com.jun.util.ConnectionUtil;
 
@@ -83,6 +84,24 @@ public class GetController {
 			rList = managerDAO.getAllCompletedReimbursements(con);
 			try {
 				return map.writeValueAsString(rList);
+			} catch (JsonProcessingException e) {
+				return e.getMessage();
+			}
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+	}
+	
+	@GET
+	@Path("/all-employees")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllEmployees() {
+		try(Connection con = ConnectionUtil.getConnection()) {
+			ObjectMapper map = new ObjectMapper();
+			ArrayList<Employee> eList = new ArrayList<>();
+			eList = managerDAO.getAllEmployees(con);
+			try {
+				return map.writeValueAsString(eList);
 			} catch (JsonProcessingException e) {
 				return e.getMessage();
 			}
