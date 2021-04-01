@@ -91,7 +91,7 @@ public class ManagerDAOImpl implements ManagerDAO {
 		}
 		
 		if(email != "null") { 
-			String emsql = "UPDATE reimbursement.users SET last_name = ? WHERE login_id = ?";
+			String emsql = "UPDATE reimbursement.users SET email = ? WHERE login_id = ?";
 			PreparedStatement emps = con.prepareStatement(emsql);
 			emps.setString(1, email);
 			emps.setInt(2, id);

@@ -20,7 +20,7 @@
         <div class="card border-0 text-center">
             <div class="card-body">
               <h5 class="card-title">Edit information</h5>
-              <p class="card-text">Submit only the fields you want to update</p>
+              <p class="card-text">Edit the fields you want to update</p>
               <form id="edit-info">
                 <div class="form-group">
                     <input type="text" data-id="${id}"class="form-control update-field" id="update-firstname" name="firstname" placeholder="Change First Name" value="${firstName}">
@@ -37,8 +37,9 @@
                 <div class="form-group">
                     <input type="password" class="form-control update-field" id="confirm-password" name="confirmpassword" placeholder="Confirm New Password">
                 </div>
-                <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                <button type="submit" class="btn btn-primary" id="updateinfo-button">Update</button>
               </form>
+              <div id="updated"></div>
             </div>
           </div>
         </div>
@@ -59,4 +60,5 @@ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07j
 crossorigin="anonymous"
 ></script>
 <script src="/EmployeeReimbursementApp/js/navbar.js"></script>
+<script src="/EmployeeReimbursementApp/js/update-info.js"></script>
 </html>

@@ -31,6 +31,8 @@ public class EmployeeServlet extends HttpServlet {
     	try (Connection con = ConnectionUtil.getConnection()) {
     		response.setContentType("text/html");
     		RequestDispatcher dispatcher;
+    		//TODO: !!!!
+    		// we're gonna have to update session data bc we might have updated user info
 //    		HttpSession session=request.getSession();
 //    		String username = request.getParameter("username");
 //    		String password = request.getParameter("password");

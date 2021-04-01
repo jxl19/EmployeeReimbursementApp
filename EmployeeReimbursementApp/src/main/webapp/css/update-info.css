@@ -1,8 +1,4 @@
-.top {
-    height: 20vh;
-}
-
-.update-field, .submit-button {
+.update-field, #updateinfo-button {
     width: 50%;
     margin: auto;
 }

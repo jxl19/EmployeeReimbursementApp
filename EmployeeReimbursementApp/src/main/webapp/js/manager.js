@@ -97,7 +97,7 @@ $('.modal-content').on('click', '.modal-approve', function() {
       'Accept' : 'application/json'
     }})
     .then(res => res.json()) 
-    .then(data => data ? $(`tbody[name=${id}]`).remove() : console.log("data2" + data));
+    .then(data => data ? $(`tbody[name=${id}]`).remove() : console.log(data));
 })
 
 //close confirmation modal
