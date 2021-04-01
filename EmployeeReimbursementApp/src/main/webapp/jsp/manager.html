@@ -30,9 +30,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="">Resolved Transactions</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Update Information</a>
-            </li>
             </ul>
             <div>
         <a href="/EmployeeReimbursementApp/logout">Logout</a>
@@ -42,7 +39,8 @@
     <div class="container">
         <div>
             <form>
-                <input type="username" class="form-control user-login" id="username" placeholder="Search with employee id">
+                <input type="text" class="form-control user-login col-md-9" id="search-emp" placeholder="Search with employee id">
+                <button id="search-button" class="col-md-2" type="submit">Search</button>
             </form>
             <table id="requests" class="table borderless loading">
               

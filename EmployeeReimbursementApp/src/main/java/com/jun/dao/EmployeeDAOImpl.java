@@ -57,7 +57,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public Employee getEmployeeInfo(int loginId, Connection con) throws SQLException {
-		// TODO Auto-generated method stub
 		Employee employee = null;
 		String sql = "SELECT * FROM reimbursement.users JOIN reimbursement.employee_type ON users.login_id = employee_type.login_id JOIN reimbursement.login ON reimbursement.login.login_id = users.login_id WHERE login.login_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);

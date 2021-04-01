@@ -97,7 +97,13 @@ $('.modal-content').on('click', '.modal-approve', function() {
       'Accept' : 'application/json'
     }})
     .then(res => res.json()) 
-    .then(data => data ? $(`tbody[name=${id}]`).remove() : console.log(data));
+    .then(data => {
+      if (data) {
+        $(`tbody[name=${id}]`).remove();
+        $(`td[name=${id}pending]`).empty().append("false")
+        $(`td[name=${id}approved]`).empty().append(approved);
+      }
+    });
 })
 
 //close confirmation modal
@@ -112,6 +118,55 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+$('#search-button').on('click', function(e) {
+  e.preventDefault();
+  let requestData = "";
+  const id = $('#search-emp').val();
+  console.log("searching", id);
+  fetch('http://localhost:8080/EmployeeReimbursementApp/api/get/employee/' + id)
+  .then(res => res.json())
+  .then(data => {
+    if(data.length) {
+      data.forEach(r => {
+        requestData += `
+        <tbody>
+          <tr>
+          <td>${r.rId}</td>
+          <td>${id}</td>
+          <td>${r.amount}</td>
+          <td>${r.reason}</td>
+          <td name="${r.rId}pending">${r.pending}</td>
+          <td name="${r.rId}approved">${r.approved}</td>
+          <td class="material-icons">
+              <span id="approve" data-id=${r.rId}>check_circle_outline</span> 
+              <span id="decline" data-id=${r.rId}>highlight_off</span>
+          </td>
+          </tr>
+        `
+      })
+      requestData+= `</tbody></table>`;
+      $("#requests").empty();
+      $("#requests").append(
+        `<thead id="table-head">
+          <tr>
+          <th scope="col">Request Id</th>
+          <th scope="col">Employee Id</th>
+          <th scope="col">Expenses</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Pending</th>
+          <th scope="col">Approved</th>
+          <th scope="col"></th>
+          </tr>
+        </thead>`
+        )
+      $("#requests").append(requestData);
+    } else {
+      $("#requests").empty();
+      $("#requests").append(`<p id="zeroreqs" style="text-align: center">This user has nothing`)
+    }
+  })
+})
 
 $(document).ready(function () {
     getAllPendingRequests();

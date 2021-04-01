@@ -4,6 +4,10 @@
 
 * {box-sizing: border-box}
 
+#search-emp {
+  display: inline-flex;
+}
+
 /* Set a style for all buttons */
 button {
   background-color: #4CAF50;
@@ -14,6 +18,13 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+}
+
+#search-button {
+  background-color:#0054ff9e;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 8px;
 }
 
 button:hover {
