@@ -6,10 +6,10 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav mr-auto justify-content-center">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/EmployeeReimbursementApp/homepage">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">Settings</a>
+        <a href="/EmployeeReimbursementApp/updateinfo" class="nav-link" href="">Settings</a>
     </li>
     </ul>
     <div>
@@ -49,7 +49,7 @@ function loadRequestData(employeeId) {
           requestData += `
           <tbody>
             <tr>
-              <th scope="row">${r.rId}</th>
+              <td>${r.rId}</td>
               <td>${r.amount}</td>
               <td>${r.reason}</td>
               <td>${r.pending}</td>
@@ -109,7 +109,7 @@ function postNewRequest() {
     $('#requests').append(`          
     <tbody>
     <tr>
-      <th scope="row">${data.rId}</th>
+      <td>${data.rId}</td>
       <td>${data.amount}</td>
       <td>${data.reason}</td>
       <td>${data.pending}</td>

@@ -19,13 +19,18 @@ public class LoginDAOImpl implements LoginDAO {
 		ps.setString(1, username);
 		ps.setString(2, password);
 		
+//		boolean isManager, int loginId, String firstName, String lastName, String hireDate,
+//		String birthDate, String email
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			boolean isManager = rs.getBoolean("is_manager");
 			int loginId = rs.getInt("login_id");
 			String firstName = rs.getString("first_name");
 			String lastName = rs.getString("last_name");
-			employee = new Employee(isManager, loginId, firstName, lastName);
+			String hireDate = rs.getString("hire_date");
+			String birthDate = rs.getString("birth_date");
+			String email = rs.getString("email");
+			employee = new Employee(isManager, loginId, firstName, lastName, hireDate, birthDate, email);
 		}
 		
 		return employee;

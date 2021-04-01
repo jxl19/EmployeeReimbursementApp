@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EmployeeServlet</servlet-name>
-    <url-pattern>/EmployeeServlet</url-pattern>
+    <url-pattern>/updateinfo</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -30,17 +30,27 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
-    <servlet>
-        <servlet-name>Jersey</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.jun.rest</param-value>
-        </init-param>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Jersey</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
+  <servlet>
+    <servlet-name>Jersey</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.jun.rest</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HomeServlet</display-name>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>com.jun.servlets.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/homepage</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,7 +9,7 @@ function getAllPendingRequests() {
             <tbody name=${r.rId}>
               <tr>
                 <td>${r.rId}</td>
-                <td>${r.userId}</td
+                <td>${r.userId}</td>
                 <td>${r.amount}</td>
                 <td>${r.reason}</td>
                 <td>${r.pending}</td>
@@ -28,8 +28,8 @@ function getAllPendingRequests() {
             `<thead id="table-head">
               <tr>
                 <th scope="col">Request Id</th>
-                <th scope="col">Employee Id</th
-                <th scope="col">Expense</th>
+                <th scope="col">Employee Id</th>
+                <th scope="col">Expenses</th>
                 <th scope="col">Reason</th>
                 <th scope="col">Pending</th>
                 <th scope="col">Approved</th>

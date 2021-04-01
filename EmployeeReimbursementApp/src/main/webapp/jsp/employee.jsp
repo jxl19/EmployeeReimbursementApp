@@ -29,9 +29,10 @@
 				<div class="card border-0">
 					<div class="card-body">
 						<h5 class="card-title text-center">${firstName} ${lastName}</h5>
-						<p class="card-text text-center">Id: ${id}</p>
-						<p class="card-text text-center">Total Reimbursed: $320</p>
-						<p class="card-text text-center">Date of Birth: 03/24/1993</p>
+						<p id="user-id" value =${id} class="card-text text-center">Id: ${id}</p>
+						<p class="card-text text-center">Email: ${email}</p>
+						<p class="card-text text-center">Birth Date: ${birthDate}</p>
+						<p class="card-text text-center">Hire Date: ${hireDate}</p>
 					</div>
 				</div>
 			</div>
