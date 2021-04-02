@@ -12,6 +12,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,6 +32,7 @@ public class PostController {
 	
 	public EmployeeDAO employeeDAO;
 	public ManagerDAO managerDAO;
+	private static Logger log = Logger.getLogger(PostController.class);
 	public PostController() {
 		super();
 		this.employeeDAO = new EmployeeDAOImpl();
@@ -40,7 +43,7 @@ public class PostController {
 	@Path("/createrequest")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createRequest(String body) {
-		System.out.println("body: " + body);
+		log.info("Request to create new reimbursement.");
 		ObjectMapper map = new ObjectMapper();
 		String response = null;
 		try {
@@ -51,9 +54,11 @@ public class PostController {
 				Reimbursement r = employeeDAO.createNewReimbursement(reimburse.getUserId(), reimburse.getAmount(), reimburse.getReason(), con);
 				response = map.writeValueAsString(r);
 			} catch (SQLException e) {
+				log.info("Error trying to create new reimbursement.");
 				e.getMessage();
 			}
 		} catch (JsonProcessingException e) {
+			log.info("Error trying to create new reimbursement.");
 			e.getMessage();
 		}
 		return Response.status(200).entity(response).build();
@@ -63,14 +68,14 @@ public class PostController {
 	@Path("/review-request")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateRequest(String body) {
-		System.out.println("updatebody: " + body);
+		log.info("Manager updating reimbursement request.");
 		String response = null;
 		ObjectMapper map = new ObjectMapper();
 		try {
 			UpdateRequests ur = map.readValue(body, UpdateRequests.class);
 			try(Connection con = ConnectionUtil.getConnection()) {
-				System.out.println("ur: " + ur);
 				UpdateRequests approved = managerDAO.reviewReimbursement(ur.isApproved(), ur.getrId(), con);
+				log.info("Reimbursement request is: " + ur.isApproved());
 				response = map.writeValueAsString(approved);
 			} catch (SQLException e) {
 				e.getMessage();
@@ -78,7 +83,6 @@ public class PostController {
 		} catch (JsonProcessingException e) {
 			e.getMessage();
 		}
-		System.out.println("approvedincont: " + response);
 		return Response.status(200).entity(response).build();
 	}
 
@@ -89,16 +93,19 @@ public class PostController {
 		String response = null;
 		ObjectMapper map = new ObjectMapper();
 		try(Connection con = ConnectionUtil.getConnection()) {
+			log.info("User " + id +" is updating information");
 			JsonNode jsonNode = map.readTree(body);
 			String firstName = jsonNode.get("firstName").asText();
 			String lastName = jsonNode.get("lastName").asText();
 			String email = jsonNode.get("email").asText();
 			String password = jsonNode.get("password").asText();
-			Employee e = managerDAO.updateEmployee(id, firstName, lastName, email, password, con);
+			Employee e = employeeDAO.updateEmployee(id, firstName, lastName, email, password, con);
 			response = map.writeValueAsString(e);
 		} catch (SQLException | JsonProcessingException e) {
+			log.info("Error updating information");
 			e.getMessage();
 		} 
+		log.info("User " + id +" has successfully updated their information");
 		return Response.status(200).entity(response).build();
 	}
 }

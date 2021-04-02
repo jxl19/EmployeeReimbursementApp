@@ -86,7 +86,7 @@ public class LoginServlet extends HttpServlet {
 			processRequest(request, response);
 		} catch (SQLException | NullPointerException e) {
 			RequestDispatcher dispatcher;
-			log.info("There was an error trying to log in");
+			log.warn("There was an error trying to log in");
 			request.setAttribute("invalidPassword", "Invalid Username or Password");
 			dispatcher = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 			dispatcher.forward(request,response);

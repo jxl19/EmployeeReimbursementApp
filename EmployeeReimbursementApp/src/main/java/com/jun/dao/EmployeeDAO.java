@@ -11,4 +11,5 @@ public interface EmployeeDAO {
 	public ArrayList<Reimbursement> getAllReimbursementRequests(int loginId, Connection con) throws SQLException;
 	public Reimbursement createNewReimbursement(int loginId, double amount, String reason, Connection con) throws SQLException;
 	public Employee getEmployeeInfo(int loginId, Connection con) throws SQLException;
+	public Employee updateEmployee(String id, String username, String firstName, String lastName, String password, Connection con) throws SQLException;
 }

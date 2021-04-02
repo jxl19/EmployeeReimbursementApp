@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.jun.dao.EmployeeDAO;
 import com.jun.dao.EmployeeDAOImpl;
 import com.jun.model.Employee;
 import com.jun.util.ConnectionUtil;
 
-/**
- * Servlet implementation class HomeServlet
- */
+
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static Logger log = Logger.getLogger(HomeServlet.class);
 	public EmployeeDAO employeeDAO;
     public HomeServlet() {
         super();
@@ -32,7 +32,6 @@ public class HomeServlet extends HttpServlet {
 		response.setContentType("text/html");
 		RequestDispatcher dispatcher;
 		HttpSession session=request.getSession();
-		System.out.println("id inside homepage " + session.getAttribute("id"));
 		
 		try (Connection con = ConnectionUtil.getConnection()) {
 		Employee user = employeeDAO.getEmployeeInfo((int) session.getAttribute("id"), con);
@@ -46,9 +45,11 @@ public class HomeServlet extends HttpServlet {
 			boolean isManager = user.isManager();
 			
 			if (!isManager) {
+				log.info("User " + id + " has accessed the home page.");
 				dispatcher = getServletContext().getRequestDispatcher("/jsp/employee.jsp");
 				dispatcher.forward(request, response);
 			} else if (isManager){
+				log.info("Manager " + id + " has accessed the home page.");
 				dispatcher = getServletContext().getRequestDispatcher("/jsp/manager.html");
 				dispatcher.forward(request, response);
 			}

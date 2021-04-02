@@ -1,4 +1,4 @@
-let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
+let x = `<a class="navbar-brand" href="/EmployeeReimbursementApp/homepage">Employee Reimbursement</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -9,7 +9,7 @@ let x = `<a class="navbar-brand" href="#">Employee Reimbursement</a>
       <a class="nav-link" href="/EmployeeReimbursementApp/homepage">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a href="/EmployeeReimbursementApp/updateinfo" class="nav-link" href="">Settings</a>
+        <a href="/EmployeeReimbursementApp/updateinfo" class="nav-link" href="">Update Information</a>
     </li>
     </ul>
     <div>

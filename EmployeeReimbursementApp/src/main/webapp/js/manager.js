@@ -208,14 +208,18 @@ $('#all-employees').on('click', function() {
 })
 
 $('#pending-transactions').on('click', function() {
-  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-pending-requests');
 })
 
 $('#resolved-transactions').on('click', function() {
   getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-completed-requests');
 })
 
+$('#all-transactions').on('click', function() {
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
+})
+
 $(document).ready(function () {
   //pending reqs
-  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-requests');
+  getRequests('http://localhost:8080/EmployeeReimbursementApp/api/get/all-pending-requests');
 })

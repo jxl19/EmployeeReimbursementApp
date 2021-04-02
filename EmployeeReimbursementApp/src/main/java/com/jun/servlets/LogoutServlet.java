@@ -2,19 +2,17 @@ package com.jun.servlets;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class LogoutServlet
- */
+import org.apache.log4j.Logger;
+
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static Logger log = Logger.getLogger(LogoutServlet.class);
 
     public LogoutServlet() {
         super();
@@ -22,9 +20,8 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 System.out.println("logging out");
 		 HttpSession session=request.getSession();  
+		 log.info("User " + session.getAttribute("id") + " has logged out");
          session.invalidate();  
-//         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
-//         dispatcher.forward(request, response);
          response.sendRedirect(request.getContextPath() + "/jsp/login.jsp");
 	}
 

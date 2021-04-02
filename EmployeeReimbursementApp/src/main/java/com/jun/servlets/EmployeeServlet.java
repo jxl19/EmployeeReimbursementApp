@@ -1,7 +1,6 @@
 package com.jun.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,16 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.jun.dao.EmployeeDAO;
 import com.jun.dao.EmployeeDAOImpl;
-import com.jun.dao.LoginDAO;
-import com.jun.dao.LoginDAOImpl;
-import com.jun.model.Employee;
-import com.jun.util.ConnectionUtil;
 
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public EmployeeDAO employeeDAO;
+	private static Logger log = Logger.getLogger(EmployeeServlet.class);
 	
     public EmployeeServlet() {
         super();
@@ -30,6 +28,8 @@ public class EmployeeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
     		response.setContentType("text/html");
     		RequestDispatcher dispatcher;
+    		HttpSession session=request.getSession();  
+   		 	log.info("User " + session.getAttribute("id") + " has accessed the update information page.");
     		dispatcher = getServletContext().getRequestDispatcher("/jsp/update-info.jsp");
     		dispatcher.forward(request, response);
 		
