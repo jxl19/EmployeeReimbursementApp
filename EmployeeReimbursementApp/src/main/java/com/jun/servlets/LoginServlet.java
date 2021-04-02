@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.jun.dao.EmployeeDAO;
 import com.jun.dao.EmployeeDAOImpl;
 import com.jun.dao.LoginDAO;
@@ -23,18 +25,22 @@ public class LoginServlet extends HttpServlet {
     
 	public LoginDAO loginDAO;
 	public EmployeeDAO employeeDAO;
+	private static Logger log = Logger.getLogger(LoginServlet.class);
 	
     public LoginServlet() {
         super();
         this.loginDAO = new LoginDAOImpl();
         this.employeeDAO = new EmployeeDAOImpl();
     }
+    
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
     	try (Connection con = ConnectionUtil.getConnection()) {
     		response.setContentType("text/html");
     		RequestDispatcher dispatcher;
     		HttpSession session=request.getSession();
+    		
     		String username = request.getParameter("username");
     		String password = request.getParameter("password");
     		Employee user = loginDAO.authenticateUser(username, password, con);
@@ -52,8 +58,10 @@ public class LoginServlet extends HttpServlet {
     		boolean isManager = user.isManager();
     		
     		if (!isManager) {
+    			log.info("User " + id + " has logged in");
     			response.sendRedirect("/EmployeeReimbursementApp/homepage");
     		} else if (isManager){
+    			log.info("Manager " + id + " has logged in");
     			dispatcher = getServletContext().getRequestDispatcher("/jsp/manager.html");
     			dispatcher.forward(request, response);
     		} else {
@@ -78,6 +86,7 @@ public class LoginServlet extends HttpServlet {
 			processRequest(request, response);
 		} catch (SQLException | NullPointerException e) {
 			RequestDispatcher dispatcher;
+			log.info("There was an error trying to log in");
 			request.setAttribute("invalidPassword", "Invalid Username or Password");
 			dispatcher = getServletContext().getRequestDispatcher("/jsp/login.jsp");
 			dispatcher.forward(request,response);
