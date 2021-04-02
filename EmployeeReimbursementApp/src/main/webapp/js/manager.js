@@ -50,7 +50,6 @@ function getRequests(url) {
 $('#requests').on('click','#approve',function() {
     const id = $(this).attr('data-id');
     $('.modal-content').empty();
-    console.log('clicked')
     $('.modal-content').append(`
     <h1>Approve Reimbursement</h1>
     <p>Are you sure you want to approve the reimbursement?</p>
@@ -64,7 +63,6 @@ $('#requests').on('click','#approve',function() {
 // modal to check if decline
 $('#requests').on('click','#decline',function() {
     const id = $(this).attr('data-id');
-    console.log('clicked2')
     $('.modal-content').empty();
     $('.modal-content').append(`
     <h1>Decline Reimbursement</h1>
@@ -84,7 +82,6 @@ var modal = document.getElementById('confirmation-modal');
 $('.modal-content').on('click', '.modal-approve', function() {
     const id = $(this).attr('data-id');
     const approved = $(this).attr('data-bool');
-    console.log({id, approved})
     const updateRequest = {
         rId: id,
         approved: approved
@@ -109,7 +106,6 @@ $('.modal-content').on('click', '.modal-approve', function() {
 
 //close confirmation modal
 $('.modal-content').on('click', '.modal-decline' ,function() {
-    console.log('declined');
     modal.style.display = "none";
 })
 
@@ -124,7 +120,6 @@ $('#search-button').on('click', function(e) {
   e.preventDefault();
   let requestData = "";
   const id = $('#search-emp').val();
-  console.log("searching", id);
   fetch('http://localhost:8080/EmployeeReimbursementApp/api/get/employee/' + id)
   .then(res => res.json())
   .then(data => {

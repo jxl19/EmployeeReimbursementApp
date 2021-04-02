@@ -47,9 +47,7 @@ public class PostController {
 		ObjectMapper map = new ObjectMapper();
 		String response = null;
 		try {
-			System.out.println("bodyinside " + body);
 			Reimbursement reimburse = map.readValue(body, Reimbursement.class);
-			System.out.println("re: " + reimburse);
 			try(Connection con = ConnectionUtil.getConnection()) {				
 				Reimbursement r = employeeDAO.createNewReimbursement(reimburse.getUserId(), reimburse.getAmount(), reimburse.getReason(), con);
 				response = map.writeValueAsString(r);

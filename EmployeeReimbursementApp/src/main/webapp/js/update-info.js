@@ -11,7 +11,6 @@ function updateInfo() {
         password : password
     }
     
-    console.log({id, updateInfoData});
     fetch(`http://localhost:8080/EmployeeReimbursementApp/api/post/update-user/${id}`, {
         method:'put',
         body: JSON.stringify(updateInfoData),
@@ -24,11 +23,7 @@ function updateInfo() {
             if (data) {
                 $('#updated').empty();
                 $('#updated').append(`
-                <h3 style="color:#4CAF50">Successfully Updated</h3>
-                <div>Redirecting to homepage..</div>`);
-                setTimeout(() => {
-                    window.location.replace('/EmployeeReimbursementApp/jsp/employee.jsp');
-                }, 1500);
+                <h3 style="color:#4CAF50">Successfully Updated</h3>`);
             } else {
                 $('#updated').append(`<h1 style="color:#fb5347c4">There was an error with update</h1>`);
             }

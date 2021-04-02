@@ -36,8 +36,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- add ability to filter thru all/pending/done -->
-			<!-- add loading to right-card when making ajax post -->
 			<div class="right-card col-sm-6">
 				<table id="requests" value="${id}" class="table borderless loading">
 					

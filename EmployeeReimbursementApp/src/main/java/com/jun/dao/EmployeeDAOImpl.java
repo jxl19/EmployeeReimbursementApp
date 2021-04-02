@@ -73,7 +73,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			String em = rs.getString("email");
 			employee = new Employee(isManager, userId, fn, ln, hireDate, birthDate, em);
 		}
-		System.out.println("employee inside dao " + employee);
 		return employee;
 	}
 
@@ -84,7 +83,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		Employee employee = null;
 		int id = Integer.parseInt(loginId);
 		if(firstName != "null") { 
-			System.out.println("in here fn " + firstName);
 			String fnsql = "UPDATE reimbursement.users SET first_name = ? WHERE login_id = ?";
 			PreparedStatement fnps = con.prepareStatement(fnsql);
 			fnps.setString(1, firstName);
@@ -114,7 +112,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			pwps.setString(1, password);
 			pwps.setInt(2, id);	
 			pwps.executeUpdate();
-			System.out.println("updated pw also");
 		}
 		con.commit();
 		String sql = "SELECT * FROM reimbursement.users JOIN reimbursement.employee_type ON users.login_id = employee_type.login_id JOIN reimbursement.login ON reimbursement.login.login_id = users.login_id WHERE login.login_id = ?";
@@ -131,7 +128,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			String em = rs.getString("email");
 			employee = new Employee(isManager, userId, fn, ln, hireDate, birthDate, em);
 		}
-		System.out.println("employee: " + employee);
 		return employee;
 	}
 	

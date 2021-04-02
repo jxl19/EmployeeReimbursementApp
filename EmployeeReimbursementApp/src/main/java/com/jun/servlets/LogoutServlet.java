@@ -18,7 +18,6 @@ public class LogoutServlet extends HttpServlet {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 System.out.println("logging out");
 		 HttpSession session=request.getSession();  
 		 log.info("User " + session.getAttribute("id") + " has logged out");
          session.invalidate();  
